@@ -23,4 +23,5 @@
 hs_err_pid*
 
 # ide ignore
+target/
 *.iml

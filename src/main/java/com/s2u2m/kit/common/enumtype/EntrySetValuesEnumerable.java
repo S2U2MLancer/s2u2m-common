@@ -14,47 +14,46 @@
  * limitations under the License.
  */
 
-package com.s2u2m.kit.common.exception;
-
-import com.s2u2m.kit.common.enumtype.IntEnumerable;
+package com.s2u2m.kit.common.enumtype;
 
 import java.text.MessageFormat;
 
 /**
- * ErrorValueEnumerable create on 2018/11/1
+ * EntrySetValuesEnumerable create on 2018/11/1
  *
  * @author Amos Xia
  */
-public interface ErrorValueEnumerable<ET extends ErrorTypeEnumerable> extends IntEnumerable {
+public interface EntrySetValuesEnumerable<KT extends EntrySetKeysEnumerable> extends IntEnumerable {
 
-    /** get specific error type for this kind of error values.
+    /** get specific entry set key type for this kind of values.
      *
-     * @return specific error type
+     * @return specific key type
      */
-    ET getErrorType();
+    KT getKey();
 
     /**
-     * Get integer error getCode by error type and error value.
+     * Get integer code by key and value.
      *
-     * @return integer error getCode
+     * @return integer code
      */
     default int getCode() {
-        ET errorType = this.getErrorType();
-        int offset = errorType.offsetBits();
+        KT key = this.getKey();
+        int offset = key.offsetBits();
         if (offset >= Integer.SIZE) {
             String error = MessageFormat.format(
                     "{0} offset[{1}] must smaller than max offset[{2}]",
-                    errorType.getClass().getTypeName(), offset, Integer.SIZE);
+                    key.getClass().getTypeName(), offset, Integer.SIZE);
             throw new IndexOutOfBoundsException(error);
         }
 
-        int maxErrorValue = 1 << offset;
-        if (this.getValue() >= maxErrorValue) {
-            String error = MessageFormat.format("{0}[{1}] out of max bound[{2}]",
-                    this.getClass().getTypeName(), this.getValue(), maxErrorValue);
+        int maxValue = 1 << offset;
+        if (this.getValue() >= maxValue) {
+            String error = MessageFormat.format(
+                    "{0}[{1}] out of max bound[{2}], pls divide into pieces",
+                    this.getClass().getTypeName(), this.getValue(), maxValue);
             throw new IndexOutOfBoundsException(error);
         }
 
-        return errorType.getValue() << offset | this.getValue();
+        return key.getValue() << offset | this.getValue();
     }
 }

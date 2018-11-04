@@ -1,4 +1,5 @@
-/* * Copyright 2018 s2u2m
+/*
+ * Copyright 2018 s2u2m
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +14,22 @@
  * limitations under the License.
  */
 
-package com.s2u2m.kit.common.exception;
+package com.s2u2m.kit.common.enumtype;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * ErrorValueEnumerableTest create on 2018/11/1
+ * EntrySetEnumerableTest create on 2018/11/1
  *
  * @author Amos Xia
  */
-class ErrorValueEnumerableTest {
+class EntrySetEnumerableTest {
 
     private static final int OFFSET_BITS = 10;
 
-    private enum TestErrorTypeEnum implements ErrorTypeEnumerable {
+    private enum TestErrorTypeEnum implements EntrySetKeysEnumerable {
         UNKNOWN(0),
         INNER(1),
         ;
@@ -49,17 +50,17 @@ class ErrorValueEnumerableTest {
         }
     }
 
-    private enum TestInnerErrorValueEnum implements ErrorValueEnumerable<TestErrorTypeEnum> {
+    private enum TestInnerEntrySetValuesEnum implements EntrySetValuesEnumerable<TestErrorTypeEnum> {
         UNKNOWN(1),
         ;
 
         private final int value;
-        TestInnerErrorValueEnum(int value) {
+        TestInnerEntrySetValuesEnum(int value) {
             this.value = value;
         }
 
         @Override
-        public TestErrorTypeEnum getErrorType() {
+        public TestErrorTypeEnum getKey() {
             return TestErrorTypeEnum.INNER;
         }
 
@@ -71,8 +72,8 @@ class ErrorValueEnumerableTest {
 
     @Test
     void getCode__success() {
-        TestInnerErrorValueEnum input = TestInnerErrorValueEnum.UNKNOWN;
-        int expect = input.getErrorType().getValue() << 10 | input.getValue();
+        TestInnerEntrySetValuesEnum input = TestInnerEntrySetValuesEnum.UNKNOWN;
+        int expect = input.getKey().getValue() << 10 | input.getValue();
         int result = input.getCode();
         assertEquals(expect, result);
     }

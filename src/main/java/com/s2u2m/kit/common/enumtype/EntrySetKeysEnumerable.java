@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package com.s2u2m.kit.common.exception;
-
-import com.s2u2m.kit.common.enumtype.IntEnumerable;
+package com.s2u2m.kit.common.enumtype;
 
 /**
- * ErrorTypeEnumerable create on 2018/11/1
+ * EntrySetKeysEnumerable create on 2018/11/1
  *
  * @author Amos Xia
  */
-public interface ErrorTypeEnumerable extends IntEnumerable {
-
+public interface EntrySetKeysEnumerable extends IntEnumerable {
 
     /**
-     * Bit count taken by error type in an integer(32 bits).
+     * Bit count taken by key type in an integer(32 bits).
      * @return bit count
      */
     int offsetBits();
