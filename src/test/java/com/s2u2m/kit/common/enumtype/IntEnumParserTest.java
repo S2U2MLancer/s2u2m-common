@@ -16,16 +16,17 @@
 
 package com.s2u2m.kit.common.enumtype;
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * IntEnumParserTest create on 2018/11/1
  *
  * @author Amos Xia
  */
-class IntEnumParserTest {
+public class IntEnumParserTest {
 
     private enum TestIntEnum implements IntEnumerable {
         UNKNOWN(0),
@@ -43,7 +44,7 @@ class IntEnumParserTest {
     }
 
     @Test
-    void convert__success() {
+    public void convert__success() {
         TestIntEnum input = TestIntEnum.UNKNOWN;
         TestIntEnum output = IntEnumParser.convert(input.getValue(), TestIntEnum.class);
         assertEquals(input, output);

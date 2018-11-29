@@ -16,16 +16,17 @@
 
 package com.s2u2m.kit.common.enumtype;
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * EntrySetEnumerableTest create on 2018/11/1
  *
  * @author Amos Xia
  */
-class EntrySetEnumerableTest {
+public class EntrySetEnumerableTest {
 
     private static final int OFFSET_BITS = 10;
 
@@ -71,7 +72,7 @@ class EntrySetEnumerableTest {
     }
 
     @Test
-    void getCode__success() {
+    public void getCode__success() {
         TestInnerEntrySetValuesEnum input = TestInnerEntrySetValuesEnum.UNKNOWN;
         int expect = input.getKey().getValue() << 10 | input.getValue();
         int result = input.getCode();
